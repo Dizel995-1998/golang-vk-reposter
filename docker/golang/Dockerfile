@@ -1,0 +1,13 @@
+FROM golang
+
+WORKDIR /go/src
+
+COPY ./ /go/src
+
+RUN go build ./hello.go
+
+ENV VK_PUBLIC_URL "$VK_PUBLIC_URL"
+ENV TELEGRAM_TOKEN "$TELEGRAM_TOKEN"
+ENV TELEGRAM_CHAT_ID "$TELEGRAM_CHAT_ID"
+
+ENTRYPOINT ./hello --vk-url $VK_PUBLIC_URL --tg-token $TELEGRAM_TOKEN --tg-chat $TELEGRAM_CHAT_ID

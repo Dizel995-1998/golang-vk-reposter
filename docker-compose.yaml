@@ -1,0 +1,15 @@
+version: '3'
+services:
+  redis:
+    image: redis
+
+  application:
+    build:
+      dockerfile: docker/golang/Dockerfile
+      context: ./
+    environment:
+      VK_PUBLIC_URL: ${VK_PUBLIC_URL?}
+      TELEGRAM_TOKEN: ${TELEGRAM_TOKEN?}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID?}
+    depends_on:
+      - redis
